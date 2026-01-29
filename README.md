@@ -168,10 +168,6 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
-### <a name="output_directories_in_cwd"></a> [directories\_in\_cwd](#output\_directories\_in\_cwd)
-
-Description: A list of directories in the current working directory.
-
 ### <a name="output_files_in_cwd"></a> [files\_in\_cwd](#output\_files\_in\_cwd)
 
 Description: A list of files in the current working directory.
