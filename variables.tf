@@ -1,11 +1,23 @@
 variable "organization_name" {
-  description = "(Optional) The name of the HCP Terraform organization."
+  description = "(Required) The name of the HCP Terraform organization."
   type        = string
-  default     = "benoitblais-hashicorp"
+  nullable    = false
 }
 
 variable "workspace_name" {
-  description = "(Optional) The name of the HCP Terraform workspace."
+  description = "(Required) The name of the HCP Terraform workspace."
   type        = string
-  default     = "terraform-renovate"
+  nullable    = false
+}
+
+variable "enable_terraform_remote_state" {
+  description = "(Optional) Enable reading outputs using the terraform_remote_state data source."
+  type        = bool
+  default     = false
+}
+
+variable "enable_tfe_outputs" {
+  description = "(Optional) Enable reading outputs using the tfe_outputs data source."
+  type        = bool
+  default     = false
 }
