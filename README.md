@@ -127,6 +127,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.7.5)
 
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.7.5)
+
 ## Modules
 
 No modules.
