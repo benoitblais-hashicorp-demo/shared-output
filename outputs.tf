@@ -1,6 +1,6 @@
 output "data" {
   description = "Value from the remote state data source."
-  value       = data.terraform_remote_state.data.uuid
+  value       = data.terraform_remote_state.data.outputs.uuid
 }
 
 output "files_in_cwd" {
