@@ -41,7 +41,7 @@ Remote state sharing enables loosely-coupled infrastructure modules to communica
 
 This demo follows a standard remote state consumption pattern:
 
-1. **Source Workspace Setup**: 
+1. **Source Workspace Setup**:
    - Another workspace in your organization (e.g., `networking-infrastructure`, `vpc-foundation`) runs Terraform and produces outputs
    - Common outputs include VPC IDs, subnet IDs, security group IDs, or any exported values
    - The source workspace must complete at least one successful `terraform apply` to generate state
