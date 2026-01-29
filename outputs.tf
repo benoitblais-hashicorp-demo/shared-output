@@ -5,7 +5,7 @@ output "terraform_remote_state" {
 
 output "tfe_outputs" {
   description = "Value from the `tfe_outputs` data source."
-  value       = data.tfe_outputs.this.outputs.uuid
+  value       = data.tfe_outputs.this.values.uuid
 }
 
 output "files_in_cwd" {
