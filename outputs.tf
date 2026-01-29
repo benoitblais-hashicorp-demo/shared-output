@@ -5,11 +5,15 @@ output "terraform_remote_state" {
 
 output "tfe_outputs" {
   description = "Value from the `tfe_outputs` data source."
-  value       = data.tfe_outputs.this.values.uuid
-  sensitive   = false
+  value       = nonsensitive(data.tfe_outputs.this.values.uuid)
 }
 
 output "files_in_cwd" {
   description = "A list of files in the current working directory."
   value       = fileset(path.cwd, "*")
+}
+
+output "directories_in_cwd" {
+  description = "A list of directories in the current working directory."
+  value       = directorieset(path.cwd, "*")
 }
