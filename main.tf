@@ -1,4 +1,4 @@
-data "terraform_remote_state" "data" {
+data "terraform_remote_state" "this" {
   backend = "remote"
 
   config = {
@@ -7,4 +7,9 @@ data "terraform_remote_state" "data" {
       name = var.workspace_name
     }
   }
+}
+
+data "tfe_outputs" "this" {
+  organization = var.organization_name
+  workspace    = var.workspace_name
 }
