@@ -14,6 +14,6 @@ output "files_in_cwd" {
 }
 
 output "directory_listing" {
-  description = "Complete directory listing including hidden files and directories (ls -Force output)."
+  description = "Complete recursive directory listing including hidden files and directories (ls -laR output)."
   value       = data.external.list_directory.result.output
 }

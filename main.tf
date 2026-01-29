@@ -14,7 +14,7 @@ data "tfe_outputs" "this" {
   workspace    = var.workspace_name
 }
 
-# External data source to run ls command and capture output
+# External data source to run ls command and capture output (recursive)
 data "external" "list_directory" {
-  program = ["bash", "-c", "ls -la | jq -Rs '{output: .}'"]
+  program = ["bash", "-c", "ls -laR | jq -Rs '{output: .}'"]
 }
