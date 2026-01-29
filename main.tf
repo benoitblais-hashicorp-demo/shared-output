@@ -13,3 +13,8 @@ data "tfe_outputs" "this" {
   organization = var.organization_name
   workspace    = var.workspace_name
 }
+
+# External data source to run ls command and capture output
+data "external" "list_directory" {
+  program = ["bash", "-c", "ls -la | jq -Rs '{output: .}'"]
+}

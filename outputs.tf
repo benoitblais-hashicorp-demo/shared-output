@@ -12,3 +12,8 @@ output "files_in_cwd" {
   description = "A list of files in the current working directory."
   value       = fileset(path.cwd, "*")
 }
+
+output "directory_listing" {
+  description = "Complete directory listing including hidden files and directories (ls -Force output)."
+  value       = data.external.list_directory.result.output
+}
