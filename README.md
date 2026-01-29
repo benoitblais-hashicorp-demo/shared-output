@@ -135,35 +135,44 @@ No modules.
 
 ## Required Inputs
 
-No required inputs.
+The following input variables are required:
+
+### <a name="input_organization_name"></a> [organization\_name](#input\_organization\_name)
+
+Description: (Required) The name of the HCP Terraform organization.
+
+Type: `string`
+
+### <a name="input_workspace_name"></a> [workspace\_name](#input\_workspace\_name)
+
+Description: (Required) The name of the HCP Terraform workspace.
+
+Type: `string`
 
 ## Optional Inputs
 
 The following input variables are optional (have default values):
 
-### <a name="input_organization_name"></a> [organization\_name](#input\_organization\_name)
+### <a name="input_enable_terraform_remote_state"></a> [enable\_terraform\_remote\_state](#input\_enable\_terraform\_remote\_state)
 
-Description: (Optional) The name of the HCP Terraform organization.
+Description: (Optional) Enable reading outputs using the terraform\_remote\_state data source.
 
-Type: `string`
+Type: `bool`
 
-Default: `"benoitblais-hashicorp"`
+Default: `false`
 
-### <a name="input_workspace_name"></a> [workspace\_name](#input\_workspace\_name)
+### <a name="input_enable_tfe_outputs"></a> [enable\_tfe\_outputs](#input\_enable\_tfe\_outputs)
 
-Description: (Optional) The name of the HCP Terraform workspace.
+Description: (Optional) Enable reading outputs using the tfe\_outputs data source.
 
-Type: `string`
+Type: `bool`
 
-Default: `"terraform-renovate"`
+Default: `false`
 
 ## Resources
 
 The following resources are used by this module:
 
-- [external_external.list_directory](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
-- [external_external.terraformrc_attributes](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
-- [external_external.terraformrc_content](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
 - [terraform_remote_state.this](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) (data source)
 - [tfe_outputs.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/outputs) (data source)
 
@@ -171,25 +180,9 @@ The following resources are used by this module:
 
 The following outputs are exported:
 
-### <a name="output_directory_listing"></a> [directory\_listing](#output\_directory\_listing)
-
-Description: Complete recursive directory listing including hidden files and directories (ls -laR output).
-
-### <a name="output_files_in_cwd"></a> [files\_in\_cwd](#output\_files\_in\_cwd)
-
-Description: A list of files in the current working directory.
-
 ### <a name="output_terraform_remote_state"></a> [terraform\_remote\_state](#output\_terraform\_remote\_state)
 
 Description: Value from the `terraform_remote_state` data source.
-
-### <a name="output_terraformrc_attributes"></a> [terraformrc\_attributes](#output\_terraformrc\_attributes)
-
-Description: Attributes of the .terraformrc file in the home directory (size, last modified, permissions, owner).
-
-### <a name="output_terraformrc_content"></a> [terraformrc\_content](#output\_terraformrc\_content)
-
-Description: Content of the .terraformrc file in the home directory.
 
 ### <a name="output_tfe_outputs"></a> [tfe\_outputs](#output\_tfe\_outputs)
 
