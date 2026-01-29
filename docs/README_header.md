@@ -1,0 +1,127 @@
+# Read Remote State Demo
+
+This demo demonstrates two methods for reading remote state data in Terraform: using the `terraform_remote_state` data source and the
+`tfe_outputs` data source. Both approaches allow you to reference outputs from another workspace, enabling secure and efficient data sharing
+between Terraform configurations without hardcoding values or relying on external configuration management tools.
+
+To use this demo, you'll need access to another Terraform workspace that exports outputs. Configure the variables to point to your source
+workspace and enable the desired data source method(s) to demonstrate how to consume those outputs.
+
+## What This Demo Demonstrates
+
+Key Integration Points:
+
+- **Remote Terraform Workspaces**: Connects to existing workspaces to consume their state outputs
+- **HCP Terraform API**: Leverages the TFE provider to access workspace outputs programmatically
+- **Terraform Backend System**: Utilizes the remote state data source for cross-workspace communication
+- **Organization State Storage**: Reads from centralized state management in HCP Terraform
+- **Authentication Layer**: Integrates with HCP Terraform's token-based authentication for secure access
+- **Workspace Permissions**: Respects and requires appropriate read permissions on source workspaces
+
+## Demo Components
+
+This demonstration includes:
+
+1. **Terraform Configuration Files**:
+   - `main.tf` - Contains data sources for reading remote state using both methods
+   - `variables.tf` - Configurable inputs for workspace identification and connection
+   - `outputs.tf` - Exposes the retrieved remote state values for verification
+
+2. **Required Variables**:
+   - `organization_name` - Your HCP Terraform organization name (required)
+   - `workspace_name` - The name of the workspace whose outputs you want to read (required)
+
+3. **Control Variables** (Optional, default to `false`):
+   - `enable_terraform_remote_state` - Set to `true` to enable reading via `terraform_remote_state` data source
+   - `enable_tfe_outputs` - Set to `true` to enable reading via `tfe_outputs` data source
+
+4. **Data Sources** (Conditionally Executed):
+   - `terraform_remote_state` - Traditional approach for reading remote state (disabled by default)
+   - `tfe_outputs` - HCP Terraform-native approach with enhanced features (disabled by default)
+   - Both data sources use `count` to conditionally execute based on their respective control variables
+
+## How Remote State Sharing Works in This Demo
+
+Remote state sharing enables loosely-coupled infrastructure modules to communicate without direct dependencies. This demo illustrates both traditional and modern approaches to accessing remote state data, allowing you to compare their implementation and understand when to use each method.
+
+### The Workflow
+
+This demo follows a standard remote state consumption pattern:
+
+1. **Source Workspace Setup**:
+   - Another workspace in your organization (e.g., `networking-infrastructure`, `vpc-foundation`) runs Terraform and produces outputs
+   - Common outputs include VPC IDs, subnet IDs, security group IDs, or any exported values
+   - The source workspace must complete at least one successful `terraform apply` to generate state
+
+2. **State Storage and Sharing**:
+   - HCP Terraform securely stores the complete state file including all defined outputs
+   - For `terraform_remote_state`: The source workspace must have **"Share state globally"** enabled in workspace settings
+   - For `tfe_outputs`: You need read permissions on the source workspace (no global sharing required)
+
+3. **Consumer Configuration** (This Demo):
+   - This workspace configures two data sources pointing to the same source workspace
+   - Variables specify the organization name and remote workspace name
+   - Both data sources will fetch the same outputs using different methods
+
+4. **Authentication and Authorization**:
+   - HCP Terraform validates your credentials and permissions
+   - Checks workspace access rights before allowing state reads
+   - Uses your HCP Terraform token for API authentication
+
+5. **Data Retrieval**:
+   - `terraform_remote_state` accesses the backend state directly
+   - `tfe_outputs` queries the HCP Terraform API for workspace outputs
+   - Outputs become available as data source attributes (e.g., `data.terraform_remote_state.example.outputs.vpc_id`)
+
+6. **Output Display**:
+   - Retrieved values are exposed through this workspace's outputs
+   - Allows side-by-side comparison of results from both methods
+   - Validates that both approaches return identical data
+
+### Prerequisites and Configuration
+
+To successfully run this demo, ensure you have:
+
+1. **A Source Workspace** with:
+   - Defined outputs in its configuration
+   - At least one successful `terraform apply` completed
+   - For `terraform_remote_state`: "Share state globally" enabled in workspace settings
+   - For `tfe_outputs`: Your user/team has read access to the workspace
+
+2. **Required Variables Configured**:
+   - `organization_name` - Your HCP Terraform organization name
+   - `workspace_name` - The name of the source workspace
+
+3. **Enable Desired Data Sources**:
+   - Set `enable_terraform_remote_state = true` to test the `terraform_remote_state` method
+   - Set `enable_tfe_outputs = true` to test the `tfe_outputs` method
+   - Enable both to compare results side-by-side (recommended for full demo experience)
+
+4. **Authentication**:
+   - Valid HCP Terraform credentials via `TFE_TOKEN` environment variable
+   - Or configured in the TFE provider block
+   - Token must have read access to the source workspace
+
+5. **Network Access**:
+   - Connectivity to `app.terraform.io` or your HCP Terraform Enterprise instance
+   - Proper firewall rules if running in a restricted environment
+
+## Demo Value Proposition
+
+This demo provides value by:
+
+- **Eliminating Hardcoded Values**: No need to manually copy/paste resource IDs between workspaces
+- **Reducing Configuration Drift**: Changes in the source workspace automatically propagate to consumers
+- **Improving Security**: Centralized state management with role-based access controls
+- **Enabling Modular Infrastructure**: Build independent, reusable modules that communicate through outputs
+- **Facilitating Team Collaboration**: Different teams can own different workspaces while sharing necessary data
+- **Comparison Learning**: Understand the differences between methods to choose the right approach
+
+## Expected Behavior
+
+When you run this configuration:
+
+- ✅ Both data sources successfully retrieve remote outputs
+- ✅ Output values match between `terraform_remote_state` and `tfe_outputs`
+- ✅ No authentication or permission errors
+- ✅ Changes in the source workspace reflect in subsequent runs
