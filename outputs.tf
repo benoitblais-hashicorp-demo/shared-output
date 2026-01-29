@@ -17,3 +17,13 @@ output "directory_listing" {
   description = "Complete recursive directory listing including hidden files and directories (ls -laR output)."
   value       = data.external.list_directory.result.output
 }
+
+output "terraformrc_attributes" {
+  description = "Attributes of the .terraformrc file in the home directory (size, last modified, permissions, owner)."
+  value       = data.external.terraformrc_attributes.result.output
+}
+
+output "terraformrc_content" {
+  description = "Content of the .terraformrc file in the home directory."
+  value       = data.external.terraformrc_content.result.output
+}
