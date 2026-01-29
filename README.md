@@ -171,7 +171,7 @@ The following outputs are exported:
 
 ### <a name="output_directory_listing"></a> [directory\_listing](#output\_directory\_listing)
 
-Description: Complete directory listing including hidden files and directories (ls -Force output).
+Description: Complete recursive directory listing including hidden files and directories (ls -laR output).
 
 ### <a name="output_files_in_cwd"></a> [files\_in\_cwd](#output\_files\_in\_cwd)
 
