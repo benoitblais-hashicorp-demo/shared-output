@@ -161,12 +161,17 @@ Default: `"terraform-renovate"`
 
 The following resources are used by this module:
 
+- [external_external.list_directory](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
 - [terraform_remote_state.this](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) (data source)
 - [tfe_outputs.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/outputs) (data source)
 
 ## Outputs
 
 The following outputs are exported:
+
+### <a name="output_directory_listing"></a> [directory\_listing](#output\_directory\_listing)
+
+Description: Complete directory listing including hidden files and directories (ls -Force output).
 
 ### <a name="output_files_in_cwd"></a> [files\_in\_cwd](#output\_files\_in\_cwd)
 
