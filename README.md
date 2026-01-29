@@ -4,9 +4,12 @@ Repository to run demo of Terraform tfe_output and terraform_remote_state
 <!-- BEGIN_TF_DOCS -->
 # Read Remote State Demo
 
-This demo demonstrates two methods for reading remote state data in Terraform: using the `terraform_remote_state` data source and the `tfe_outputs` data source. Both approaches allow you to reference outputs from another workspace, enabling secure and efficient data sharing between Terraform configurations without hardcoding values or relying on external configuration management tools.
+This demo demonstrates two methods for reading remote state data in Terraform: using the `terraform_remote_state` data source and the
+`tfe_outputs` data source. Both approaches allow you to reference outputs from another workspace, enabling secure and efficient data sharing
+between Terraform configurations without hardcoding values or relying on external configuration management tools.
 
-To use this demo, you'll need access to another Terraform workspace that exports outputs (e.g., a networking or infrastructure workspace). Configure the variables to point to your source workspace, and this configuration will demonstrate how to consume those outputs.
+To use this demo, you'll need access to another Terraform workspace that exports outputs. Configure the variables to point to your source
+workspace and enable the desired data source method(s) to demonstrate how to consume those outputs.
 
 ## What This Demo Demonstrates
 
@@ -29,13 +32,17 @@ This demonstration includes:
    - `outputs.tf` - Exposes the retrieved remote state values for verification
 
 2. **Required Variables**:
-   - `organization` - Your HCP Terraform organization name
-   - `remote_workspace_name` - The name of the workspace whose outputs you want to read
-   - `tfe_token` - (Optional) Authentication token for HCP Terraform API access
+   - `organization_name` - Your HCP Terraform organization name (required)
+   - `workspace_name` - The name of the workspace whose outputs you want to read (required)
 
-3. **Data Sources**:
-   - `terraform_remote_state` - Traditional approach for reading remote state
-   - `tfe_outputs` - HCP Terraform-native approach with enhanced features
+3. **Control Variables** (Optional, default to `false`):
+   - `enable_terraform_remote_state` - Set to `true` to enable reading via `terraform_remote_state` data source
+   - `enable_tfe_outputs` - Set to `true` to enable reading via `tfe_outputs` data source
+
+4. **Data Sources** (Conditionally Executed):
+   - `terraform_remote_state` - Traditional approach for reading remote state (disabled by default)
+   - `tfe_outputs` - HCP Terraform-native approach with enhanced features (disabled by default)
+   - Both data sources use `count` to conditionally execute based on their respective control variables
 
 ## How Remote State Sharing Works in This Demo
 
@@ -86,16 +93,20 @@ To successfully run this demo, ensure you have:
    - For `tfe_outputs`: Your user/team has read access to the workspace
 
 2. **Required Variables Configured**:
-   - `organization` - Your HCP Terraform organization name
-   - `remote_workspace_name` - The name of the source workspace
-   - Optionally: `tfe_token` for explicit authentication
+   - `organization_name` - Your HCP Terraform organization name
+   - `workspace_name` - The name of the source workspace
 
-3. **Authentication**:
+3. **Enable Desired Data Sources**:
+   - Set `enable_terraform_remote_state = true` to test the `terraform_remote_state` method
+   - Set `enable_tfe_outputs = true` to test the `tfe_outputs` method
+   - Enable both to compare results side-by-side (recommended for full demo experience)
+
+4. **Authentication**:
    - Valid HCP Terraform credentials via `TFE_TOKEN` environment variable
    - Or configured in the TFE provider block
    - Token must have read access to the source workspace
 
-4. **Network Access**:
+5. **Network Access**:
    - Connectivity to `app.terraform.io` or your HCP Terraform Enterprise instance
    - Proper firewall rules if running in a restricted environment
 
