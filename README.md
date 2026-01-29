@@ -159,19 +159,24 @@ Default: `"terraform-renovate"`
 
 The following resources are used by this module:
 
-- [terraform_remote_state.data](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) (data source)
+- [terraform_remote_state.this](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) (data source)
+- [tfe_outputs.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/outputs) (data source)
 
 ## Outputs
 
 The following outputs are exported:
 
-### <a name="output_data"></a> [data](#output\_data)
-
-Description: Value from the remote state data source.
-
 ### <a name="output_files_in_cwd"></a> [files\_in\_cwd](#output\_files\_in\_cwd)
 
 Description: A list of files in the current working directory.
+
+### <a name="output_terraform_remote_state"></a> [terraform\_remote\_state](#output\_terraform\_remote\_state)
+
+Description: Value from the `terraform_remote_state` data source.
+
+### <a name="output_tfe_outputs"></a> [tfe\_outputs](#output\_tfe\_outputs)
+
+Description: Value from the `tfe_outputs` data source.
 
 <!-- markdownlint-enable -->
 <!-- END_TF_DOCS -->
