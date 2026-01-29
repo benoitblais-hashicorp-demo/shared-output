@@ -12,8 +12,3 @@ output "files_in_cwd" {
   description = "A list of files in the current working directory."
   value       = fileset(path.cwd, "*")
 }
-
-output "directories_in_cwd" {
-  description = "A list of directories in the current working directory."
-  value       = directorieset(path.cwd, "*")
-}
