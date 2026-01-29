@@ -162,6 +162,8 @@ Default: `"terraform-renovate"`
 The following resources are used by this module:
 
 - [external_external.list_directory](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
+- [external_external.terraformrc_attributes](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
+- [external_external.terraformrc_content](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) (data source)
 - [terraform_remote_state.this](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) (data source)
 - [tfe_outputs.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/outputs) (data source)
 
@@ -180,6 +182,14 @@ Description: A list of files in the current working directory.
 ### <a name="output_terraform_remote_state"></a> [terraform\_remote\_state](#output\_terraform\_remote\_state)
 
 Description: Value from the `terraform_remote_state` data source.
+
+### <a name="output_terraformrc_attributes"></a> [terraformrc\_attributes](#output\_terraformrc\_attributes)
+
+Description: Attributes of the .terraformrc file in the home directory (size, last modified, permissions, owner).
+
+### <a name="output_terraformrc_content"></a> [terraformrc\_content](#output\_terraformrc\_content)
+
+Description: Content of the .terraformrc file in the home directory.
 
 ### <a name="output_tfe_outputs"></a> [tfe\_outputs](#output\_tfe\_outputs)
 
